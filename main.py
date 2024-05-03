@@ -39,7 +39,10 @@ async def update_board(board_id: int, board: BoardRequest) -> str:
         has_bindings=board.has_bindings,
         brand=board.brand,
     )
-    snowboards[board_id - 1] = new_board
+    if board_id - 1 > len(snowboards):
+        snowboards.append(new_board)
+    else:
+        snowboards[board_id - 1] = new_board
     return "Board updated successfully"
 
 
